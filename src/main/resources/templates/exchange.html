@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Конвертер</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+        <table>
+            <form th:action="@{/exchange}"  th:object="${request}"  method="post">
+            <tr>
+                <td>
+                    <label for="currencyFrom">Основная валюта</label>
+                </td>
+                
+                <td>
+                    <select th:field="*{currencyFrom}" id="currencyFrom" >
+                        <option th:each="list : ${list}" th:value="${list}" th:text="${list}"></option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input type="number" min="0" step="0.01" th:field="*{amount}">
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for="currencyTo">Целевая валюта</label>
+                </td>
+                
+                <td>
+                    <select th:field="*{currencyTo}" id="currencyTo" >
+                        <option th:each="list : ${list}" th:value="${list}" th:text="${list}"></option>
+                    </select>
+                </td>
+                
+                <td>
+                    <input th:value="${result}" type="text" readonly>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Посчитать">
+                </form>
+                </td>
+                <td>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/stats}" method="get">
+                        <input type="submit" value="stats">
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+</body>
+</html>
